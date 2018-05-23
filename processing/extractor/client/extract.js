@@ -41,9 +41,11 @@ function getFps(durationInSeconds) {
   // this gives around 15 images per video
  // return `1/${Math.ceil(durationInSeconds / 15)}`;
 
+ return '1/1';
+
   // for a more complete analysis,
   // use this code that will extract up to 100 images
-  
+  /*
   if (durationInSeconds <= 10) {
     return '2/1'; // 2 images per seconds
   } else if (durationInSeconds > 10 && durationInSeconds <= 100) {
@@ -51,7 +53,7 @@ function getFps(durationInSeconds) {
   } else { // eslint-disable-line no-else-return
     return '1/1';// 1 image per seconds
     //return `1/${Math.ceil(durationInSeconds / 100)}`;
-  }
+  }*/
   
 }
 
