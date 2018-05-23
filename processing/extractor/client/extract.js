@@ -49,7 +49,8 @@ function getFps(durationInSeconds) {
   } else if (durationInSeconds > 10 && durationInSeconds <= 100) {
     return '1/1'; // 1 image per seconds
   } else { // eslint-disable-line no-else-return
-    return `1/${Math.ceil(durationInSeconds / 100)}`;
+    return '1/1';// 1 image per seconds
+    //return `1/${Math.ceil(durationInSeconds / 100)}`;
   }
   
 }
