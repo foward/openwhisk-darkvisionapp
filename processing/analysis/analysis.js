@@ -208,6 +208,8 @@ function analyzeImage(args, fileName, analyzeCallback) {
     (callback) => {
       // Call Face Detection passing the image in the request
       // http://www.ibm.com/watson/developercloud/visual-recognition/api/v3/?curl#detect_faces
+      // https://text-model-api-explorer.mybluemix.net/visual-recognition/api/v3/recognize_text?api_key=a08ad1d3ea1acdc7238d685eb958f7c04ab60a87&version=2016-05-20
+      /*
       fs.createReadStream(fileName).pipe(
         request({
           method: 'POST',
@@ -227,6 +229,126 @@ function analyzeImage(args, fileName, analyzeCallback) {
               body.images[0].faces.sort((face1, face2) =>
                 face1.face_location.left - face2.face_location.left) :
               [];
+          }
+          callback(null);
+        }));
+
+        {
+  "images": [
+    {
+      "image": "Screen Shot 2018-05-22 at 17.22.15.png",
+      "text": "tug sports\nvivo\niveco\nade 1733 334 126",
+      "words": [
+        {
+          "word": "tug",
+          "location": {
+            "width": 111,
+            "height": 87,
+            "left": 1951,
+            "top": 103
+          },
+          "score": 0.6042,
+          "line_number": 0
+        },
+        {
+          "word": "sports",
+          "location": {
+            "width": 223,
+            "height": 72,
+            "left": 2072,
+            "top": 122
+          },
+          "score": 0.8558,
+          "line_number": 0
+        },
+        {
+          "word": "vivo",
+          "location": {
+            "width": 108,
+            "height": 44,
+            "left": 2185,
+            "top": 204
+          },
+          "score": 0.8237,
+          "line_number": 1
+        },
+        {
+          "word": "iveco",
+          "location": {
+            "width": 487,
+            "height": 126,
+            "left": 1004,
+            "top": 370
+          },
+          "score": 0.9779,
+          "line_number": 2
+        },
+        {
+          "word": "ade",
+          "location": {
+            "width": 59,
+            "height": 31,
+            "left": 1755,
+            "top": 1295
+          },
+          "score": 0.6336,
+          "line_number": 3
+        },
+        {
+          "word": "1733",
+          "location": {
+            "width": 118,
+            "height": 46,
+            "left": 2008,
+            "top": 1275
+          },
+          "score": 0.4132,
+          "line_number": 3
+        },
+        {
+          "word": "334",
+          "location": {
+            "width": 107,
+            "height": 36,
+            "left": 2057,
+            "top": 1285
+          },
+          "score": 0.5904,
+          "line_number": 3
+        },
+        {
+          "word": "126",
+          "location": {
+            "width": 92,
+            "height": 30,
+            "left": 2193,
+            "top": 1296
+          },
+          "score": 0.5615,
+          "line_number": 3
+        }
+      ]
+    }
+  ],
+  "images_processed": 1
+}
+
+        */
+       fs.createReadStream(fileName).pipe(
+        request({
+          method: 'POST',
+          url: 'https://text-model-api-explorer.mybluemix.net/visual-recognition/api/v3/recognize_text' + // eslint-disable-line
+            '?api_key=' + args.watsonApiKey +
+            '&version=2016-05-20',
+          headers: {
+            'Content-Length': fs.statSync(fileName).size
+          },
+          json: true
+        }, (err, response, body) => {
+          if (err) {
+            console.log('TEXT Detection', err);
+          } else if (body.images && body.images.length > 0) {
+            analysis.face_detection = body.images[0].words;
           }
           callback(null);
         }));
