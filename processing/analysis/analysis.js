@@ -239,7 +239,7 @@ function analyzeImage(args, fileName, analyzeCallback) {
           method: 'POST',
           url: 'https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify' + // eslint-disable-line
             '?api_key=' + args.watsonApiKey +
-            '&classifier_ids=modelo_iveco_2_726321032,23051138_NewABCModel_1001033135'+
+            '&classifier_ids=modelo_iveco_3_1911004586,DefaultCustomModel_415975770'+
             '&version=2016-05-20',
           headers: {
             'Content-Length': fs.statSync(fileName).size
